@@ -10,8 +10,8 @@ This provider plugin is maintained by the Akamai Developer team at [Akamai](http
 Requirements
 ------------
 
--	[Terraform](https://www.terraform.io/downloads.html) 0.11.x
--	[Go](https://golang.org/doc/install) 1.9.x
+- [Terraform](https://www.terraform.io/downloads.html) 0.11.x
+- [Go](https://golang.org/doc/install) 1.9.x
 
 ## Provider Configuration
 
@@ -19,8 +19,8 @@ The configuration for this provider requires the location of an .edgerc credenti
 
 ```hcl
 provider "akamai" {
-  edgerc = "~/.edgerc"
-  papi_section = "papi"
+  edgerc          = "~/.edgerc"
+  papi_section    = "papi"
   fastdns_section = "dns"
 }
 ```
@@ -53,19 +53,20 @@ resource "akamai_fastdns_zone" "test_zone" {
   hostname = "example.com"
 
   a {
-    name = "www"
-    ttl = 600
+    name   = "www"
+    ttl    = 600
     active = true
     target = "5.6.7.8"
   }
 
   cname {
-    name = "blog"
-    ttl = 600
+    name   = "blog"
+    ttl    = 600
     active = true
     target = "example.com."
   }
 }
+
 ```
 
 An more complete example configuration can be found [here](https://github.com/akamai/terraform-provider-akamai/blob/master/examples/akamai_fastdns_zone/add-records/dns.tf).
@@ -76,52 +77,52 @@ This resource represents a property (web site) configuration hosted on the Akama
 
 ```hcl
 resource "akamai_property" "dshafik_sandbox" {
-	name = "dshafik.sandbox.akamaideveloper.com"
-	account_id = "act_####"
-	product_id = "prd_SPM"
-	cp_code = "######"
-	contact = ["dshafik@akamai.com"]
-	hostname = ["dshafik.sandbox.akamaideveloper.com"]
+  name       = "dshafik.sandbox.akamaideveloper.com"
+  account_id = "act_####"
+  product_id = "prd_SPM"
+  cp_code    = "######"
+  contact    = ["dshafik@akamai.com"]
+  hostname   = ["dshafik.sandbox.akamaideveloper.com"]
 
-	rules {
-		rule {
-			name = "l10n"
-			comment = "Localize the default timezone"
+  rules {
+    rule {
+      name    = "l10n"
+      comment = "Localize the default timezone"
 
-			criteria {
-				name = "path"
+      criteria {
+        name = "path"
 
-				option {
-					key = "matchOperator"
-					value = "MATCHES_ONE_OF"
-				}
+        option {
+          key   = "matchOperator"
+          value = "MATCHES_ONE_OF"
+        }
 
-				option {
-					key = "matchCaseSensitive"
-					value = "true"
-				}
+        option {
+          key   = "matchCaseSensitive"
+          value = "true"
+        }
 
-				option {
-					key = "values"
-					values = ["/"]
-				}
-			}
+        option {
+          key    = "values"
+          values = ["/"]
+        }
+      }
 
-			behavior {
-				name = "rewriteUrl"
+      behavior {
+        name = "rewriteUrl"
 
-				option {
-					key = "behavior"
-					value = "REWRITE"
-				}
+        option {
+          key   = "behavior"
+          value = "REWRITE"
+        }
 
-				option {
-					key = "targetUrl"
-					value = "/America/Los_Angeles"
-				}
-			}
-		}
-	}
+        option {
+          key   = "targetUrl"
+          value = "/America/Los_Angeles"
+        }
+      }
+    }
+  }
 }
 ```
 
